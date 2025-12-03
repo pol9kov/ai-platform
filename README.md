@@ -1,45 +1,65 @@
 # AI Platform
 
-Modular AI platform with plugin architecture.
+Модульная AI платформа с plugin архитектурой.
 
-## Structure
+## Repositories
 
-```
-apps/
-├── web/           # Next.js frontend
-└── ml-service/    # Python embeddings service
-
-plugins/
-└── thought-graph/ # RAG + DAG knowledge graph
-
-packages/
-└── core/          # Shared types & plugin system
-```
+| Repo | Description |
+|------|-------------|
+| [ai-platform](https://github.com/pol9kov/ai-platform) | Docs + submodules |
+| [ai-platform-core](https://github.com/pol9kov/ai-platform-core) | Core: auth, spaces, events |
+| [ai-platform-plugin-thoughts](https://github.com/pol9kov/ai-platform-plugin-thoughts) | Data: мысли, extraction |
+| [ai-platform-plugin-chat](https://github.com/pol9kov/ai-platform-plugin-chat) | UI: чат с AI |
+| [ai-platform-plugin-graph](https://github.com/pol9kov/ai-platform-plugin-graph) | UI: визуализация графа |
+| [ai-platform-plugin-ml](https://github.com/pol9kov/ai-platform-plugin-ml) | Service: Python embeddings |
 
 ## Quick Start
 
 ```bash
-# Install dependencies
-pnpm install
+# Clone all
+git clone --recursive https://github.com/pol9kov/ai-platform
+cd ai-platform
 
-# Run development
+# Install
+cd core && pnpm install
+
+# Run
 pnpm dev
-
-# Type check
-pnpm type-check
 ```
+
+## Architecture
+
+See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)
 
 ## Plugins
 
-### thought-graph
+Плагины независимы и общаются через events:
 
-Extract and connect thoughts using RAG (vector search) + DAG (temporal graph).
+```typescript
+// emit событие
+events.emit('message:received', { content })
 
-Features:
-- Extract multiple thoughts from text
-- Find similar thoughts via embeddings
-- Build temporal knowledge graph
-- Supports multiple AI sources (Claude, GPT, Gemini)
+// слушать событие
+events.on('thought:created', handler)
+
+// запрос с ответом
+const result = await request('ml:embed', { text })
+```
+
+## Create Your Plugin
+
+```bash
+# Create repo
+gh repo create ai-platform-plugin-myname
+
+# Implement manifest
+export const manifest = {
+  name: 'myname',
+  depends: ['core'],
+  emits: [...],
+  components: { SpaceView }
+}
+```
 
 ## License
 

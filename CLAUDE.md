@@ -1,36 +1,43 @@
 # AI Platform
 
-Monorepo: `apps/` (web, ml-service) + `plugins/` (thought-graph) + `packages/` (core)
+Docs repo with submodules. See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) for full architecture.
 
-## Rules
+## Structure
 
-- Atomic commits: <50 lines, single focus
-- Feature branches: `git checkout -b feat/name`
-- NO: `any`, direct commits to main
+```
+ai-platform/                    # This repo (docs)
+├── core/                       → ai-platform-core
+├── plugin-thoughts/            → ai-platform-plugin-thoughts
+├── plugin-chat/                → ai-platform-plugin-chat
+├── plugin-graph/               → ai-platform-plugin-graph
+└── plugin-ml/                  → ai-platform-plugin-ml
+```
+
+## Core (minimal)
+
+- Auth (login, sessions, OAuth)
+- Spaces (create, select)
+- Plugin loader
+- Event bus: emit(), on(), request(), handle()
+
+## Events
+
+```
+chat        → message:received → thoughts
+thoughts    → thought:created  → graph
+```
 
 ## Commands
 
 ```bash
-pnpm dev                    # all apps
-pnpm type-check && pnpm build  # before commit
+git clone --recursive pol9kov/ai-platform
+git submodule update --remote    # update all
 ```
 
-## Commit Format
+## Current Phase
 
-```
-type(scope): description
-# type: feat|fix|docs|refactor
-# scope: web|core|thought-graph|ml-service
-```
-
-## Current Phase: MVP
-
-1. Anonymous auth + Spaces (core, web)
-2. Thought-graph plugin (port from existing)
-3. OAuth claim flow
-
-## Key Files
-
-- `packages/core/src/types.ts` — User, Space, Session
-- `packages/core/src/plugin.ts` — Plugin system
-- `plugins/thought-graph/` — RAG + DAG
+1. Setup repos + submodules
+2. Core: auth + spaces + events
+3. plugin-thoughts: data + extraction
+4. plugin-chat: UI
+5. plugin-graph: visualization
