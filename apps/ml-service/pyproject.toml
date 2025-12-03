@@ -1,0 +1,19 @@
+[project]
+name = "ml-service"
+version = "0.0.1"
+description = "ML service for embeddings and clustering"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "sentence-transformers>=3.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.8.0",
+]
+
+[tool.ruff]
+line-length = 100
