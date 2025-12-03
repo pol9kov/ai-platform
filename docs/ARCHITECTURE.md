@@ -1,3 +1,10 @@
+---
+id: docs-architecture
+owner: @pol9kov
+status: active
+review_by: 2025-03-01
+---
+
 # AI Platform Architecture
 
 ## Overview

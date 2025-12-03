@@ -1,6 +1,12 @@
 # AI Platform
 
-Docs repo with submodules. See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) for full architecture.
+Docs repo with submodules.
+
+## Documentation
+
+- [docs/DOCS_INDEX.md](./docs/DOCS_INDEX.md) — index of all docs
+- [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — full architecture
+- [docs/LIVING_DOCS_POLICY.md](./docs/LIVING_DOCS_POLICY.md) — doc standards
 
 ## Structure
 
