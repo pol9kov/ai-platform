@@ -12,12 +12,13 @@ Docs repo with submodules.
 ## Structure
 
 ```
-ai-platform/                    # This repo (docs)
+ai-platform/                    # This repo (docs + submodules)
 ├── core/                       → ai-platform-core
-├── plugin-thoughts/            → ai-platform-plugin-thoughts
-├── plugin-chat/                → ai-platform-plugin-chat
-├── plugin-graph/               → ai-platform-plugin-graph
-└── plugin-ml/                  → ai-platform-plugin-ml
+└── plugins/
+    ├── thoughts/               → ai-platform-plugin-thoughts
+    ├── chat/                   → ai-platform-plugin-chat
+    ├── graph/                  → ai-platform-plugin-graph
+    └── ml/                     → ai-platform-plugin-ml
 ```
 
 ## Core (minimal)
@@ -43,4 +44,4 @@ git submodule update --remote    # update all
 
 ## Current Phase
 
-See [docs/ROADMAP.md](./docs/ROADMAP.md) — Phase 0: Infrastructure
+See [docs/ROADMAP.md](./docs/ROADMAP.md) — Phase 1: Core MVP

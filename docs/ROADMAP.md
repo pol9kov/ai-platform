@@ -7,14 +7,16 @@ review_by: 2025-03-01
 
 # Roadmap
 
-## Phase 0: Infrastructure
+## Phase 0: Infrastructure ✓
 
 - [x] Создать ai-platform (docs repo)
 - [x] Документация: ARCHITECTURE, LIVING_DOCS_POLICY
-- [ ] Создать ai-platform-core repo
-- [ ] Создать ai-platform-plugin-thoughts repo
-- [ ] Создать ai-platform-plugin-chat repo
-- [ ] Настроить git submodules
+- [x] Создать ai-platform-core repo
+- [x] Создать ai-platform-plugin-thoughts repo
+- [x] Создать ai-platform-plugin-chat repo
+- [x] Создать ai-platform-plugin-graph repo
+- [x] Создать ai-platform-plugin-ml repo
+- [x] Настроить git submodules
 
 ## Phase 1: Core MVP
 

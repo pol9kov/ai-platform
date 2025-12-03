@@ -1,0 +1,15 @@
+[submodule "core"]
+	path = core
+	url = https://github.com/pol9kov/ai-platform-core.git
+[submodule "plugins/thoughts"]
+	path = plugins/thoughts
+	url = https://github.com/pol9kov/ai-platform-plugin-thoughts.git
+[submodule "plugins/chat"]
+	path = plugins/chat
+	url = https://github.com/pol9kov/ai-platform-plugin-chat.git
+[submodule "plugins/graph"]
+	path = plugins/graph
+	url = https://github.com/pol9kov/ai-platform-plugin-graph.git
+[submodule "plugins/ml"]
+	path = plugins/ml
+	url = https://github.com/pol9kov/ai-platform-plugin-ml.git
