@@ -6,6 +6,7 @@ Docs repo with submodules.
 
 - [docs/DOCS_INDEX.md](./docs/DOCS_INDEX.md) — index of all docs
 - [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — full architecture
+- [docs/ROADMAP.md](./docs/ROADMAP.md) — development phases
 - [docs/LIVING_DOCS_POLICY.md](./docs/LIVING_DOCS_POLICY.md) — doc standards
 
 ## Structure
@@ -42,8 +43,4 @@ git submodule update --remote    # update all
 
 ## Current Phase
 
-1. Setup repos + submodules
-2. Core: auth + spaces + events
-3. plugin-thoughts: data + extraction
-4. plugin-chat: UI
-5. plugin-graph: visualization
+See [docs/ROADMAP.md](./docs/ROADMAP.md) — Phase 0: Infrastructure

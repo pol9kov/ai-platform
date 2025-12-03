@@ -12,6 +12,7 @@ review_by: 2025-03-01
 | Document | ID | Description |
 |----------|-----|-------------|
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | docs-architecture | Platform architecture, plugins, events |
+| [ROADMAP.md](./ROADMAP.md) | docs-roadmap | Development phases and tasks |
 | [LIVING_DOCS_POLICY.md](./LIVING_DOCS_POLICY.md) | docs-living | Documentation standards |
 
 ## Root Files
