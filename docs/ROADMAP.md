@@ -44,16 +44,17 @@ review_by: 2025-03-01
 
 **Result:** Thoughts storage and search API
 
-## Phase 3: Chat UI
+## Phase 3: Chat UI ✓
 
-**ai-platform-plugin-chat**
+**ai-platform-core** (chat integrated into core for MVP)
 
-- [ ] Manifest + registration
-- [ ] SpaceView component: chat interface
-- [ ] Message input + send
-- [ ] Emit: `message:received`
-- [ ] AI integration: OpenAI/Anthropic API
-- [ ] Context from thoughts (RAG)
+- [x] Manifest + registration
+- [x] ChatView component: chat interface
+- [x] Message input + send
+- [x] Messages database table + service
+- [x] Emit: `message:received`
+- [x] AI integration: Anthropic API
+- [x] Context from thoughts (RAG)
 
 **Result:** Working AI chat
 
