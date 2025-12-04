@@ -76,7 +76,7 @@ review_by: 2025-03-01
 **ai-platform-plugin-ml**
 
 - [ ] Python FastAPI service
-- [ ] Handle: `ml:embed` (sentence-transformers)
+- [ ] Handle request: `ml:embed` → returns vector (sentence-transformers)
 - [ ] Deploy: Railway/Fly.io
 - [ ] Fallback: OpenAI embeddings API
 
