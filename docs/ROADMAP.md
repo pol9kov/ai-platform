@@ -18,17 +18,17 @@ review_by: 2025-03-01
 - [x] Создать ai-platform-plugin-ml repo
 - [x] Настроить git submodules
 
-## Phase 1: Core MVP
+## Phase 1: Core MVP ✓
 
 **ai-platform-core**
 
-- [ ] Project setup (Next.js 15, TypeScript, Tailwind)
-- [ ] Event bus: emit(), on(), request(), handle()
-- [ ] Plugin loader: manifest validation, registration
-- [ ] Auth: anonymous user (localStorage UUID)
-- [ ] Spaces: create, select, delete
-- [ ] Layout: header, sidebar, content area
-- [ ] Plugin tabs rendering
+- [x] Project setup (Next.js 15, TypeScript, Tailwind)
+- [x] Event bus: emit(), on(), request(), handle()
+- [x] Plugin loader: manifest validation, registration
+- [x] Auth: anonymous user (localStorage UUID)
+- [x] Spaces: create, select, delete
+- [x] Layout: header, sidebar, content area
+- [x] Plugin tabs rendering
 
 **Результат:** Пустая платформа с spaces, готовая к плагинам
 

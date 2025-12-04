@@ -44,4 +44,4 @@ git submodule update --remote    # update all
 
 ## Current Phase
 
-See [docs/ROADMAP.md](./docs/ROADMAP.md) — Phase 1: Core MVP
+See [docs/ROADMAP.md](./docs/ROADMAP.md) — Phase 2: Data Layer
