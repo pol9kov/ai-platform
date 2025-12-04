@@ -44,4 +44,4 @@ git submodule update --remote    # update all
 
 ## Current Phase
 
-See [docs/ROADMAP.md](./docs/ROADMAP.md) — Phase 2: Data Layer
+See [docs/ROADMAP.md](./docs/ROADMAP.md) — Phase 3: Chat UI

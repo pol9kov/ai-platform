@@ -32,18 +32,17 @@ review_by: 2025-03-01
 
 **Result:** Empty platform with spaces, ready for plugins
 
-## Phase 2: Data Layer
+## Phase 2: Data Layer ✓
 
-**ai-platform-plugin-thoughts**
+**ai-platform-core** (thoughts integrated into core for MVP)
 
-- [ ] Manifest + registration
-- [ ] Database: Turso/SQLite setup
-- [ ] Schema: thoughts table (id, content, embedding, created_at)
-- [ ] Handle: `thoughts:create`, `thoughts:list`, `thoughts:search`
-- [ ] Listen: `message:received` → extract thoughts
-- [ ] Emit: `thought:created`
+- [x] Database: Turso/SQLite setup (libsql + drizzle-orm)
+- [x] Schema: thoughts table (id, spaceId, content, embedding, createdAt)
+- [x] API: `/api/thoughts` (GET list/search, POST create)
+- [x] Service: `thoughts:create`, `thoughts:list`, `thoughts:search`
+- [x] Emit: `thought:created` event
 
-**Result:** Thoughts storage and search
+**Result:** Thoughts storage and search API
 
 ## Phase 3: Chat UI
 
