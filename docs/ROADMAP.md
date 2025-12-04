@@ -58,16 +58,16 @@ review_by: 2025-03-01
 
 **Result:** Working AI chat
 
-## Phase 4: Visualization
+## Phase 4: Visualization ✓
 
-**ai-platform-plugin-graph**
+**ai-platform-core** (graph integrated into core for MVP)
 
-- [ ] Manifest + registration
-- [ ] SpaceView component: graph view
-- [ ] Listen: `thought:created`
-- [ ] Request: `thoughts:list`
-- [ ] Graph rendering (D3/Cytoscape)
-- [ ] Node interactions
+- [x] Manifest + registration
+- [x] SpaceView component: graph view (D3 force-directed)
+- [x] Listen: `thought:created`
+- [x] Fetch: `/api/thoughts` for data
+- [x] Graph rendering (D3)
+- [x] Node interactions (zoom, pan, drag, click)
 
 **Result:** Visualization of thought connections
 

@@ -38,17 +38,21 @@ Core does NOT know about thoughts, chat, graph. Only plugins do.
 - Have user interface
 - Render in content area
 - Switch as tabs
-- Examples: chat, graph
+- Pure UI, no business logic
+- Examples: chat (UI only), graph
 
-### Data Plugins
+### Data/Intelligence Plugins
 - Store and process data
+- Own business logic (RAG, prompts, LLM calls)
 - Provide API to other plugins
-- Examples: thoughts
+- Examples: thoughts (data + AI completion)
 
 ### Service Plugins
 - No UI
 - Provide API (request/handle)
 - Examples: ml (embeddings)
+
+**Key principle:** Thoughts plugin owns AI logic. Chat is pure UI that calls thoughts for answers.
 
 ## Communication
 
@@ -65,11 +69,16 @@ events.on('message:received', handler)
 ### Requests (need response)
 ```typescript
 // Request
-const embedding = await request('ml:embed', { text })
-const thoughts = await request('thoughts:list', { spaceId })
+const { answer } = await events.request('ai:complete', { spaceId, query })
+const embedding = await events.request('ml:embed', { text })
+const thoughts = await events.request('thoughts:list', { spaceId })
 
-// Handler
-handle('ml:embed', async ({ text }) => model.encode(text))
+// Handler (thoughts plugin registers this)
+events.handle('ai:complete', async ({ spaceId, query }) => {
+  const context = await searchThoughts(spaceId, query)  // RAG
+  const answer = await callLLM(context)                 // LLM
+  return { answer }
+})
 ```
 
 ## Data Flow
