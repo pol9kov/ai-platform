@@ -7,11 +7,11 @@ review_by: 2025-03-01
 
 # Living Docs Policy
 
-Правила документации для предотвращения устаревания.
+Documentation rules to prevent outdated docs.
 
 ## DocCard (frontmatter)
 
-Каждый документ начинается с метаданных:
+Each document starts with metadata:
 
 ```yaml
 ---
@@ -22,21 +22,21 @@ review_by: YYYY-MM-DD
 ---
 ```
 
-## Статусы
+## Statuses
 
-- **draft** — в работе, может меняться
-- **active** — актуальный документ
-- **deprecated** — устарел, см. замену
+- **draft** — work in progress, may change
+- **active** — current document
+- **deprecated** — outdated, see replacement
 
-## Правила
+## Rules
 
-1. Каждый doc должен быть в `DOCS_INDEX.md`
-2. `review_by` в прошлом = документ требует обновления
-3. При изменении кода — обновить связанные docs в том же PR
-4. Deprecated docs указывают на замену
+1. Each doc must be in `DOCS_INDEX.md`
+2. `review_by` in the past = document needs update
+3. When changing code — update related docs in the same PR
+4. Deprecated docs point to replacement
 
-## При обновлении
+## When Updating
 
-1. Сохраняй `id` стабильным
-2. Обнови `review_by` (+3 месяца для стабильных docs)
-3. Проверь актуальность содержимого
+1. Keep `id` stable
+2. Update `review_by` (+3 months for stable docs)
+3. Verify content is up to date

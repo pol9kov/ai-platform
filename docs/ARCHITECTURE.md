@@ -9,66 +9,66 @@ review_by: 2025-03-01
 
 ## Overview
 
-Модульная AI платформа с plugin архитектурой. Плагины независимы и общаются через events.
+Modular AI platform with plugin architecture. Plugins are independent and communicate via events.
 
 ## Repositories
 
 ```
 pol9kov/ai-platform                    # Docs + submodules
 pol9kov/ai-platform-core               # Core: auth, spaces, events
-pol9kov/ai-platform-plugin-thoughts    # Data: хранение мыслей, extraction
-pol9kov/ai-platform-plugin-chat        # UI: чат с AI
-pol9kov/ai-platform-plugin-graph       # UI: визуализация графа
+pol9kov/ai-platform-plugin-thoughts    # Data: thoughts storage, extraction
+pol9kov/ai-platform-plugin-chat        # UI: AI chat
+pol9kov/ai-platform-plugin-graph       # UI: graph visualization
 pol9kov/ai-platform-plugin-ml          # Service: Python embeddings
 ```
 
 ## Core (ai-platform-core)
 
-Минимальное ядро:
+Minimal core:
 - **Auth**: login/logout, anonymous users, OAuth claim
 - **Spaces**: create, select, settings
-- **Plugin loader**: загрузка и регистрация плагинов
+- **Plugin loader**: loading and registering plugins
 - **Event bus**: emit(), on(), request(), handle()
 
-Core НЕ знает про thoughts, chat, graph. Только плагины.
+Core does NOT know about thoughts, chat, graph. Only plugins do.
 
 ## Plugin Types
 
 ### UI Plugins (views)
-- Имеют интерфейс
-- Рендерятся в content area
-- Переключаются как вкладки
-- Примеры: chat, graph
+- Have user interface
+- Render in content area
+- Switch as tabs
+- Examples: chat, graph
 
 ### Data Plugins
-- Хранят и обрабатывают данные
-- Предоставляют API другим плагинам
-- Примеры: thoughts
+- Store and process data
+- Provide API to other plugins
+- Examples: thoughts
 
 ### Service Plugins
-- Не имеют UI
-- Предоставляют API (request/handle)
-- Примеры: ml (embeddings)
+- No UI
+- Provide API (request/handle)
+- Examples: ml (embeddings)
 
 ## Communication
 
 ### Events (fire-and-forget)
 ```typescript
-// Уведомления
+// Notifications
 events.emit('message:received', { content })
 events.emit('thought:created', { thought })
 
-// Подписка
+// Subscribe
 events.on('message:received', handler)
 ```
 
-### Requests (нужен ответ)
+### Requests (need response)
 ```typescript
-// Запрос
+// Request
 const embedding = await request('ml:embed', { text })
 const thoughts = await request('thoughts:list', { spaceId })
 
-// Обработчик
+// Handler
 handle('ml:embed', async ({ text }) => model.encode(text))
 ```
 
@@ -118,7 +118,7 @@ handle('ml:embed', async ({ text }) => model.encode(text))
 │  Spaces:       │   ┌────────────────────────────────────┐  │
 │  ┌──────────┐  │   │                                    │  │
 │  │ Space 1  │  │   │   Active Plugin UI                 │  │
-│  └──────────┘  │   │   (рендерится плагином)            │  │
+│  └──────────┘  │   │   (rendered by plugin)             │  │
 │  ┌──────────┐  │   │                                    │  │
 │  │ Space 2  │  │   └────────────────────────────────────┘  │
 │  └──────────┘  │                                            │

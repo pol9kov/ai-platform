@@ -9,14 +9,14 @@ review_by: 2025-03-01
 
 ## Phase 0: Infrastructure ✓
 
-- [x] Создать ai-platform (docs repo)
-- [x] Документация: ARCHITECTURE, LIVING_DOCS_POLICY
-- [x] Создать ai-platform-core repo
-- [x] Создать ai-platform-plugin-thoughts repo
-- [x] Создать ai-platform-plugin-chat repo
-- [x] Создать ai-platform-plugin-graph repo
-- [x] Создать ai-platform-plugin-ml repo
-- [x] Настроить git submodules
+- [x] Create ai-platform (docs repo)
+- [x] Documentation: ARCHITECTURE, LIVING_DOCS_POLICY
+- [x] Create ai-platform-core repo
+- [x] Create ai-platform-plugin-thoughts repo
+- [x] Create ai-platform-plugin-chat repo
+- [x] Create ai-platform-plugin-graph repo
+- [x] Create ai-platform-plugin-ml repo
+- [x] Configure git submodules
 
 ## Phase 1: Core MVP ✓
 
@@ -30,7 +30,7 @@ review_by: 2025-03-01
 - [x] Layout: header, sidebar, content area
 - [x] Plugin tabs rendering
 
-**Результат:** Пустая платформа с spaces, готовая к плагинам
+**Result:** Empty platform with spaces, ready for plugins
 
 ## Phase 2: Data Layer
 
@@ -43,7 +43,7 @@ review_by: 2025-03-01
 - [ ] Listen: `message:received` → extract thoughts
 - [ ] Emit: `thought:created`
 
-**Результат:** Хранение и поиск мыслей
+**Result:** Thoughts storage and search
 
 ## Phase 3: Chat UI
 
@@ -56,7 +56,7 @@ review_by: 2025-03-01
 - [ ] AI integration: OpenAI/Anthropic API
 - [ ] Context from thoughts (RAG)
 
-**Результат:** Работающий чат с AI
+**Result:** Working AI chat
 
 ## Phase 4: Visualization
 
@@ -69,7 +69,7 @@ review_by: 2025-03-01
 - [ ] Graph rendering (D3/Cytoscape)
 - [ ] Node interactions
 
-**Результат:** Визуализация связей между мыслями
+**Result:** Visualization of thought connections
 
 ## Phase 5: ML Service (optional)
 
@@ -80,7 +80,7 @@ review_by: 2025-03-01
 - [ ] Deploy: Railway/Fly.io
 - [ ] Fallback: OpenAI embeddings API
 
-**Результат:** Локальные embeddings
+**Result:** Local embeddings
 
 ## Future
 
