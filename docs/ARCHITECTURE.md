@@ -54,64 +54,76 @@ Core does NOT know about thoughts, chat, graph. Only plugins do.
 
 **Key principle:** Thoughts plugin owns AI logic. Chat is pure UI that calls thoughts for answers.
 
-## Communication
+## Communication (Pub/Sub)
 
-### Events (fire-and-forget)
+Plugins communicate via events. **No direct imports between plugins.**
+
+### Publishers (emit)
+- Emit events without knowing who listens
+- Decoupled from subscribers
+
+### Subscribers (on)
+- Choose which events to listen
+- Know about publishers' events (this is intentional integration)
+
 ```typescript
-// Notifications
-events.emit('message:received', { content })
-events.emit('thought:created', { thought })
+// Chat plugin (publisher) - doesn't know who listens
+events.emit('chat:message', { spaceId, content })
 
-// Subscribe
-events.on('message:received', handler)
+// Thoughts plugin (subscriber) - knows about chat events
+events.on('chat:message', async ({ spaceId, content }) => {
+  const answer = await processWithLLM(spaceId, content)
+  events.emit('chat:response', { spaceId, content: answer })
+})
+
+// Chat plugin (subscriber) - listens for responses
+events.on('chat:response', ({ content }) => {
+  displayMessage(content)
+})
 ```
 
-### Requests (need response)
+### Request/Handle (sync response)
+For cases when you need a direct response:
 ```typescript
-// Request
-const { answer } = await events.request('ai:complete', { spaceId, query })
 const embedding = await events.request('ml:embed', { text })
-const thoughts = await events.request('thoughts:list', { spaceId })
-
-// Handler (thoughts plugin registers this)
-events.handle('ai:complete', async ({ spaceId, query }) => {
-  const context = await searchThoughts(spaceId, query)  // RAG
-  const answer = await callLLM(context)                 // LLM
-  return { answer }
-})
+events.handle('ml:embed', async ({ text }) => model.encode(text))
 ```
 
 ## Data Flow
 
+### Chat → Thoughts → Chat (AI Response)
 ```
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│    chat     │  │ file-import │  │   obsidian  │
-└──────┬──────┘  └──────┬──────┘  └──────┬──────┘
-       │                │                │
-       └────────────────┼────────────────┘
-                        │
-                        ▼ emit('message:received')
-                 ┌──────────────┐
-                 │  event bus   │
-                 └──────┬───────┘
-                        │
-                        ▼ on('message:received')
-                ┌───────────────┐
-                │   thoughts    │
-                │  - extract    │
-                │  - store      │
-                └───────┬───────┘
-                        │
-                        ▼ emit('thought:created')
-                 ┌──────────────┐
-                 │  event bus   │
-                 └──────┬───────┘
-                        │
-          ┌─────────────┴─────────────┐
-          ▼                           ▼
-   ┌─────────────┐             ┌─────────────┐
-   │    graph    │             │    list     │
-   └─────────────┘             └─────────────┘
+┌─────────────┐                           ┌─────────────┐
+│    Chat     │                           │  Thoughts   │
+│  (publish)  │                           │ (subscribe) │
+└──────┬──────┘                           └──────┬──────┘
+       │                                         │
+       │ emit('chat:message')                    │
+       └──────────────────►──────────────────────┤
+                                                 │
+                                          ┌──────┴──────┐
+                                          │ - RAG       │
+                                          │ - LLM call  │
+                                          │ - save      │
+                                          └──────┬──────┘
+                                                 │
+       ┌──────────────────◄──────────────────────┘
+       │ emit('chat:response')
+       │
+┌──────┴──────┐
+│    Chat     │
+│ (subscribe) │
+│ - display   │
+└─────────────┘
+```
+
+### Thoughts → Graph (Visualization)
+```
+┌─────────────┐                           ┌─────────────┐
+│  Thoughts   │  emit('thought:created')  │    Graph    │
+│  (publish)  │ ────────────────────────► │ (subscribe) │
+└─────────────┘                           │ - update    │
+                                          └─────────────┘
 ```
 
 ## UI Structure
@@ -139,28 +151,46 @@ events.handle('ai:complete', async ({ spaceId, query }) => {
        CORE                         PLUGINS
 ```
 
-## Plugin Manifest
+## Plugin Manifests
 
+### Chat Plugin (UI)
 ```typescript
-// plugin-chat/src/index.ts
-export const manifest = {
-  name: 'chat',
+export const chatManifest = {
+  name: 'Chat',
   version: '1.0.0',
-
-  // Dependencies
   depends: ['core'],
-  optional: ['thoughts'],
 
-  // Communication
-  emits: ['message:received'],
-  listens: [],
-  handles: [],
+  emits: ['chat:message'],      // публикует сообщения
+  listens: ['chat:response'],   // слушает ответы
 
-  // UI
-  components: {
-    SpaceView: ChatView,
-    Settings: ChatSettings,
-  },
+  components: { SpaceView: ChatView },
+}
+```
+
+### Thoughts Plugin (Intelligence)
+```typescript
+export const thoughtsManifest = {
+  name: 'Thoughts',
+  version: '1.0.0',
+  depends: ['core'],
+
+  emits: ['chat:response', 'thought:created'],
+  listens: ['chat:message'],    // слушает сообщения чата
+
+  // init регистрирует обработчики
+}
+```
+
+### Graph Plugin (Visualization)
+```typescript
+export const graphManifest = {
+  name: 'Graph',
+  version: '1.0.0',
+  depends: ['core'],
+
+  listens: ['thought:created'], // слушает новые мысли
+
+  components: { SpaceView: GraphView },
 }
 ```
 
